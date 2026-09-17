@@ -61,7 +61,7 @@ export const PROJECTS: Project[] = [
     uptime: '99.9%',
     latency: '34ms',
     appWindowId: 'ai-assistant',
-    github: 'https://github.com/anuragjha2307-del/ai-research-assistant',
+    github: 'https://github.com/anuragjha2307-del/AI-Assistant',
     demoUrl: 'https://streamlit.io',
     metrics: [
       { label: 'Summarization Speed', value: '4.2x faster' },
@@ -92,7 +92,7 @@ export const PROJECTS: Project[] = [
     uptime: '99.8%',
     latency: '68ms',
     appWindowId: 'smart-presence',
-    github: 'https://github.com/anuragjha2307-del/smart-presence-biometric',
+    github: 'https://github.com/anuragjha2307-del/qr-attendance',
     demoUrl: 'https://render.com',
     metrics: [
       { label: 'Inference Latency', value: '< 280ms' },
