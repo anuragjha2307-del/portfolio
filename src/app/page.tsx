@@ -21,6 +21,7 @@ import { SystemHealthApp } from '@/components/apps/SystemHealthApp';
 import { ContactApp } from '@/components/apps/ContactApp';
 import { MobileLauncher } from '@/components/mobile/MobileLauncher';
 import { PortfolioShowcase } from '@/components/showcase/PortfolioShowcase';
+import { RecruiterTour } from '@/components/os/RecruiterTour';
 
 import { AppId, ThemeMode, WindowState } from '@/types/os';
 import { sound } from '@/lib/sound';
@@ -327,6 +328,9 @@ export default function Home() {
         onOpenApp={handleOpenApp}
         onThemeChange={(newTheme) => setTheme(newTheme)}
       />
+
+      {/* Recruiter Quick Tour & Guided Onboarding */}
+      <RecruiterTour onOpenApp={handleOpenApp} />
     </main>
   );
 }
