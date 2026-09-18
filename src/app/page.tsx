@@ -20,7 +20,6 @@ import { ResumeStudioApp } from '@/components/apps/ResumeStudioApp';
 import { SystemHealthApp } from '@/components/apps/SystemHealthApp';
 import { ContactApp } from '@/components/apps/ContactApp';
 import { MobileLauncher } from '@/components/mobile/MobileLauncher';
-import { PortfolioShowcase } from '@/components/showcase/PortfolioShowcase';
 import { RecruiterTour } from '@/components/os/RecruiterTour';
 
 import { AppId, ThemeMode, WindowState } from '@/types/os';
@@ -234,7 +233,7 @@ export default function Home() {
   }
 
   return (
-    <main className="relative min-h-screen w-full bg-slate-950 font-sans overflow-x-hidden">
+    <main className="relative h-screen w-full bg-slate-950 font-sans overflow-hidden select-none">
       {/* OS Top Menu Bar (Sticky at top) */}
       <div className="sticky top-0 z-50">
         <MenuBar
@@ -249,9 +248,6 @@ export default function Home() {
 
       {/* Interactive Desktop Canvas */}
       <Desktop onOpenApp={handleOpenApp} onThemeChange={(newTheme) => setTheme(newTheme)} />
-
-      {/* Scrollable Portfolio Showcase & Live Sandboxes */}
-      <PortfolioShowcase onOpenApp={handleOpenApp} />
 
       {/* Window Manager Canvas */}
       {(Object.keys(windows) as AppId[]).map((id) => {

@@ -125,7 +125,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onOpenApp, onThemeChange }) =>
     <div
       onContextMenu={handleContextMenu}
       onClick={closeContextMenu}
-      className="relative min-h-screen pt-10 pb-24 px-4 sm:px-6 overflow-hidden flex flex-col justify-between cyber-grid select-none"
+      className="relative h-[calc(100vh-2rem)] pt-6 pb-20 px-4 sm:px-6 overflow-hidden flex flex-col justify-between cyber-grid select-none"
     >
       {/* Visual Depth: Ambient Cursor Follower, Interactive Particle Mesh, and Code Watermarks */}
       <BackgroundCanvas />
