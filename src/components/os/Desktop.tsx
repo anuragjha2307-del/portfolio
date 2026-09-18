@@ -19,6 +19,7 @@ import {
 import { AppId, ThemeMode } from '@/types/os';
 import { sound } from '@/lib/sound';
 import { StickyNotes } from '@/components/os/StickyNotes';
+import { BackgroundCanvas } from '@/components/os/BackgroundCanvas';
 
 interface DesktopProps {
   onOpenApp: (id: AppId) => void;
@@ -126,6 +127,9 @@ export const Desktop: React.FC<DesktopProps> = ({ onOpenApp, onThemeChange }) =>
       onClick={closeContextMenu}
       className="absolute inset-0 pt-10 pb-20 px-4 sm:px-6 overflow-hidden flex flex-col justify-between cyber-grid select-none"
     >
+      {/* Visual Depth: Ambient Cursor Follower, Interactive Particle Mesh, and Code Watermarks */}
+      <BackgroundCanvas />
+
       {/* Background glowing gradients */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
