@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { AppId, ThemeMode } from '@/types/os';
 import { sound } from '@/lib/sound';
+import { StickyNotes } from '@/components/os/StickyNotes';
 
 interface DesktopProps {
   onOpenApp: (id: AppId) => void;
@@ -159,6 +160,9 @@ export const Desktop: React.FC<DesktopProps> = ({ onOpenApp, onThemeChange }) =>
           </button>
         ))}
       </div>
+
+      {/* Casual & Relatable Developer Sticky Notes */}
+      <StickyNotes onOpenApp={onOpenApp} />
 
       {/* Desktop Watermark / Quick Specs in Bottom Right */}
       <div className="relative z-10 self-end text-right hidden sm:block pointer-events-none select-none">
