@@ -11,7 +11,8 @@ import {
   Wifi, 
   BatteryCharging,
   Sparkles,
-  Layers
+  Layers,
+  Smartphone
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/common/BrandIcons';
 import { ThemeMode, AppId } from '@/types/os';
@@ -24,6 +25,7 @@ interface MenuBarProps {
   onThemeChange: (theme: ThemeMode) => void;
   onOpenApp: (id: AppId) => void;
   onOpenCommandPalette: () => void;
+  onSwitchToMobile?: () => void;
 }
 
 export const MenuBar: React.FC<MenuBarProps> = ({
@@ -32,6 +34,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
   onThemeChange,
   onOpenApp,
   onOpenCommandPalette,
+  onSwitchToMobile,
 }) => {
   const [time, setTime] = useState<string>('');
   const [date, setDate] = useState<string>('');
@@ -208,6 +211,21 @@ export const MenuBar: React.FC<MenuBarProps> = ({
           <SunMoon className="w-3.5 h-3.5 text-amber-400" />
           <span className="hidden md:inline uppercase text-[10px] text-slate-400">{currentTheme}</span>
         </button>
+
+        {/* Mobile Mode Switcher */}
+        {onSwitchToMobile && (
+          <button
+            onClick={() => {
+              sound.playClick();
+              onSwitchToMobile();
+            }}
+            className="flex items-center gap-1 px-1.5 py-0.5 rounded hover:bg-white/10 text-cyan-400 hover:text-cyan-300 transition cursor-pointer"
+            title="Switch to Mobile Launcher View"
+          >
+            <Smartphone className="w-3.5 h-3.5" />
+            <span className="hidden lg:inline text-[10px] text-cyan-300">Mobile</span>
+          </button>
+        )}
 
         {/* Battery & Wifi */}
         <div className="hidden sm:flex items-center gap-2 text-slate-400">

@@ -19,6 +19,7 @@ import { TechRadarApp } from '@/components/apps/TechRadarApp';
 import { ResumeStudioApp } from '@/components/apps/ResumeStudioApp';
 import { SystemHealthApp } from '@/components/apps/SystemHealthApp';
 import { ContactApp } from '@/components/apps/ContactApp';
+import { MobileLauncher } from '@/components/mobile/MobileLauncher';
 
 import { AppId, ThemeMode, WindowState } from '@/types/os';
 import { sound } from '@/lib/sound';
@@ -111,6 +112,17 @@ export default function Home() {
   const [activeAppId, setActiveAppId] = useState<AppId | null>('projects');
   const [topZIndex, setTopZIndex] = useState(15);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const [isMobileMode, setIsMobileMode] = useState<boolean>(false);
+
+  // Auto-detect mobile screen width < 768px
+  useEffect(() => {
+    const handleCheckMobile = () => {
+      setIsMobileMode(window.innerWidth < 768);
+    };
+    handleCheckMobile();
+    window.addEventListener('resize', handleCheckMobile);
+    return () => window.removeEventListener('resize', handleCheckMobile);
+  }, []);
 
   // Sync theme attribute to <html> tag
   useEffect(() => {
@@ -208,6 +220,17 @@ export default function Home() {
 
   const activeWindowTitle = activeAppId ? windows[activeAppId]?.title : 'AnuragOS Desktop';
 
+  // Responsive Mobile Mode (iOS / Android Springboard Bento Launcher)
+  if (isMobileMode) {
+    return (
+      <MobileLauncher
+        currentTheme={theme}
+        onThemeChange={(newTheme) => setTheme(newTheme)}
+        onSwitchToDesktop={() => setIsMobileMode(false)}
+      />
+    );
+  }
+
   return (
     <main className="relative h-full w-full overflow-hidden bg-slate-950 font-sans select-none">
       {/* OS Top Menu Bar */}
@@ -217,6 +240,7 @@ export default function Home() {
         onThemeChange={(newTheme) => setTheme(newTheme)}
         onOpenApp={handleOpenApp}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+        onSwitchToMobile={() => setIsMobileMode(true)}
       />
 
       {/* Interactive Desktop Canvas */}
