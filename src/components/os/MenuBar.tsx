@@ -105,6 +105,17 @@ export const MenuBar: React.FC<MenuBarProps> = ({
               <button
                 onClick={() => {
                   sound.playClick();
+                  window.dispatchEvent(new CustomEvent('start-anuragos-tour'));
+                  setShowOsMenu(false);
+                }}
+                className="w-full text-left px-2 py-1.5 rounded hover:bg-cyan-500/20 text-cyan-300 font-semibold flex items-center gap-2 cursor-pointer border-b border-white/10 mb-1"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Start 60s Recruiter Tour</span>
+              </button>
+              <button
+                onClick={() => {
+                  sound.playClick();
                   onOpenApp('about');
                   setShowOsMenu(false);
                 }}

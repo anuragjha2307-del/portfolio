@@ -59,6 +59,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   const commands: CommandItem[] = [
     {
+      id: 'recruiter-tour',
+      title: '⚡ Start 60-Second Recruiter Tour (One-Click Onboarding)',
+      category: 'Actions',
+      icon: <Sparkles className="w-4 h-4 text-cyan-400" />,
+      action: () => {
+        window.dispatchEvent(new CustomEvent('start-anuragos-tour'));
+      },
+      keywords: 'tour recruiter onboard walkthrough quick 60 seconds projects demo review start',
+    },
+    {
       id: 'ai-assistant',
       title: 'AI Research Assistant Suite (Live NLP Stream)',
       category: 'Projects',

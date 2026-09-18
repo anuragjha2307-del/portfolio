@@ -6,13 +6,13 @@ import {
   ArrowRight, 
   ArrowLeft, 
   X, 
-  CheckCircle2, 
   Play, 
   User, 
   FolderGit2, 
   Smartphone, 
   FileText,
-  CalendarCheck
+  Clock,
+  Compass
 } from 'lucide-react';
 import { sound } from '@/lib/sound';
 import { AppId } from '@/types/os';
@@ -33,34 +33,42 @@ interface TourStep {
 const TOUR_STEPS: TourStep[] = [
   {
     id: 1,
-    title: 'Academics & ML Internship',
-    appId: 'about',
-    badge: 'STEP 1 OF 4',
-    description: 'Anurag is an MCA candidate at Galgotias University (First Class Distinction, Zero backlogs). Reduced data processing time by 40% at EduSkills Academy.',
-    icon: <User className="w-4 h-4 text-cyan-400" />,
+    title: 'Projects Directory & Hero Sandboxes',
+    appId: 'projects',
+    badge: 'STEP 1 OF 5',
+    description: 'Explore Anurag\'s 3 flagship systems: AI NLP Research Assistant, Smart Presence Biometric Security, and Spark Dating App with interactive live sandboxes.',
+    icon: <FolderGit2 className="w-4 h-4 text-cyan-400" />,
   },
   {
     id: 2,
-    title: 'AI Research Assistant Suite',
-    appId: 'ai-assistant',
-    badge: 'STEP 2 OF 4',
-    description: 'Live Streamlit Cloud NLP sandbox. Experience automated literature summarization, PyTorch embeddings, and one-click IEEE LaTeX generation.',
-    icon: <Sparkles className="w-4 h-4 text-amber-400" />,
+    title: 'Academics & ML Internship Credentials',
+    appId: 'about',
+    badge: 'STEP 2 OF 5',
+    description: 'Galgotias University MCA (First Class Distinction, Zero Backlogs) + ML Intern at EduSkills Academy (optimized data pipelines, reducing processing latency by 40%).',
+    icon: <User className="w-4 h-4 text-purple-400" />,
   },
   {
     id: 3,
-    title: 'Spark Dating App Mobile Simulator',
-    appId: 'spark-mobile',
-    badge: 'STEP 3 OF 4',
-    description: 'Interactive 3D smartphone simulator built with React Native & Expo. Test 60fps swipe physics, match confetti, and download the standalone APK.',
-    icon: <Smartphone className="w-4 h-4 text-rose-400" />,
+    title: 'AI Research Assistant Suite (Streamlit)',
+    appId: 'ai-assistant',
+    badge: 'STEP 3 OF 5',
+    description: 'Live NLP sandbox: Test automated literature review summaries, PyTorch vector embeddings, and 1-click IEEE LaTeX citation export.',
+    icon: <Sparkles className="w-4 h-4 text-amber-400" />,
   },
   {
     id: 4,
-    title: 'ATS Resume Studio & WhatsApp',
+    title: 'Spark Dating App (React Native & Expo)',
+    appId: 'spark-mobile',
+    badge: 'STEP 4 OF 5',
+    description: 'Interactive 3D smartphone simulator with 60fps gesture physics, match celebration confetti, and direct standalone Android APK download.',
+    icon: <Smartphone className="w-4 h-4 text-rose-400" />,
+  },
+  {
+    id: 5,
+    title: 'ATS Resume Studio & Instant Booking',
     appId: 'resume-studio',
-    badge: 'STEP 4 OF 4',
-    description: 'Tailor Anurag\'s resume for AI Engineer, Full-Stack, or Mobile roles with dynamic bullet re-ordering and 1-click tailored PDF export.',
+    badge: 'STEP 5 OF 5',
+    description: 'Dynamically tailor Anurag\'s resume bullets for AI Engineer or Full-Stack roles, download ATS-optimized PDF, or start a 1-click WhatsApp chat.',
     icon: <FileText className="w-4 h-4 text-emerald-400" />,
   },
 ];
@@ -70,25 +78,42 @@ export const RecruiterTour: React.FC<RecruiterTourProps> = ({ onOpenApp }) => {
   const [inTour, setInTour] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
-  useEffect(() => {
-    // Show welcome toast after 1.5 seconds if not dismissed in session
-    const dismissed = sessionStorage.getItem('anuragos_tour_prompted');
-    if (!dismissed) {
-      const timer = setTimeout(() => {
-        setShowToast(true);
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  const handleStartTour = () => {
+  // Trigger tour start sequence: Projects window opens first, then About Me window opens smoothly!
+  const triggerTourSequence = () => {
     sound.playSuccess();
     setShowToast(false);
     sessionStorage.setItem('anuragos_tour_prompted', 'true');
     setInTour(true);
     setCurrentStepIndex(0);
-    onOpenApp(TOUR_STEPS[0].appId);
+
+    // Smooth sequence: first open Projects Window
+    onOpenApp('projects');
+
+    // Smoothly sequence opening About Me window right after 450ms
+    setTimeout(() => {
+      onOpenApp('about');
+    }, 450);
   };
+
+  useEffect(() => {
+    // Show welcome toast after 1.2s if not already seen in session
+    const dismissed = sessionStorage.getItem('anuragos_tour_prompted');
+    if (!dismissed) {
+      const timer = setTimeout(() => {
+        setShowToast(true);
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  // Listen to global tour trigger event from MenuBar, Sticky Notes, or Spotlight
+  useEffect(() => {
+    const handleGlobalStart = () => {
+      triggerTourSequence();
+    };
+    window.addEventListener('start-anuragos-tour', handleGlobalStart);
+    return () => window.removeEventListener('start-anuragos-tour', handleGlobalStart);
+  }, []);
 
   const handleDismissToast = () => {
     sound.playClick();
@@ -103,7 +128,7 @@ export const RecruiterTour: React.FC<RecruiterTourProps> = ({ onOpenApp }) => {
       setCurrentStepIndex(nextIdx);
       onOpenApp(TOUR_STEPS[nextIdx].appId);
     } else {
-      // Completed tour!
+      // Completed tour -> Open Contact directly
       sound.playSuccess();
       setInTour(false);
       onOpenApp('contact');
@@ -128,38 +153,38 @@ export const RecruiterTour: React.FC<RecruiterTourProps> = ({ onOpenApp }) => {
 
   return (
     <>
-      {/* 1. First-Time Visitor Welcome Toast Prompt */}
+      {/* 1. First-Time Visitor Toast Prompt (Top subtle floating notification) */}
       {showToast && !inTour && (
-        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 w-[92%] sm:w-auto max-w-lg animate-in slide-in-from-bottom-6 duration-300 pointer-events-auto">
-          <div className="rounded-2xl border border-cyan-400/40 bg-slate-950/95 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_30px_rgba(0,240,255,0.2)] backdrop-blur-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-slate-100">
+        <div className="fixed top-12 left-1/2 -translate-x-1/2 z-50 w-[94%] sm:w-auto max-w-2xl animate-in slide-in-from-top-4 duration-300 pointer-events-auto">
+          <div className="rounded-2xl border border-cyan-400/40 bg-slate-950/95 p-3.5 sm:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_35px_rgba(0,240,255,0.25)] backdrop-blur-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-slate-100">
             <div className="flex items-start gap-3">
-              <div className="p-2 rounded-xl bg-gradient-to-br from-cyan-500 to-purple-600 text-black shrink-0 mt-0.5 sm:mt-0">
-                <Sparkles className="w-5 h-5 fill-black" />
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 text-black shrink-0 mt-0.5 shadow-md shadow-cyan-500/20">
+                <Compass className="w-5 h-5 text-slate-950 animate-spin-slow" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-white text-xs sm:text-sm">Welcome to AnuragOS v2.4!</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                    60s Tour
+                  <span className="font-bold text-white text-xs sm:text-sm tracking-wide">Welcome to AnuragOS v2.4!</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1">
+                    <Clock className="w-2.5 h-2.5" /> 60s Tour
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-300 mt-0.5 leading-relaxed">
-                  Review Anurag&apos;s full-stack AI, mobile, and security systems in 60 seconds with guided onboarding.
+                <p className="text-[11px] sm:text-xs text-slate-300 mt-1 leading-relaxed">
+                  Click any icon or press <strong className="text-cyan-300 font-semibold">[Start Tour]</strong> to review my full-stack projects in 60 seconds.
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-2 w-full sm:w-auto justify-end shrink-0 pt-1 sm:pt-0">
               <button
-                onClick={handleStartTour}
-                className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-cyan-500/20 transition cursor-pointer"
+                onClick={triggerTourSequence}
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
-                <Play className="w-3.5 h-3.5 fill-black" />
+                <Play className="w-3.5 h-3.5 fill-slate-950" />
                 <span>Start Tour</span>
               </button>
               <button
                 onClick={handleDismissToast}
-                className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
+                className="p-2 rounded-xl hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
                 title="Dismiss"
               >
                 <X className="w-4 h-4" />
@@ -171,23 +196,23 @@ export const RecruiterTour: React.FC<RecruiterTourProps> = ({ onOpenApp }) => {
 
       {/* 2. Active Tour Guide Floating Control Bar */}
       {inTour && (
-        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 w-[94%] sm:w-[480px] animate-in zoom-in-95 duration-200 pointer-events-auto">
+        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 w-[94%] sm:w-[500px] animate-in zoom-in-95 duration-200 pointer-events-auto">
           <div className="rounded-2xl border border-cyan-400/50 bg-slate-950/95 p-4 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_35px_rgba(0,240,255,0.25)] backdrop-blur-2xl text-slate-100 flex flex-col gap-3">
             {/* Step Header */}
             <div className="flex items-center justify-between border-b border-white/10 pb-2">
               <div className="flex items-center gap-2">
                 {currentStep.icon}
                 <span className="font-bold text-white text-xs sm:text-sm">{currentStep.title}</span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
                   {currentStep.badge}
                 </span>
               </div>
               <button
                 onClick={handleExitTour}
-                className="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
+                className="p-1 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition cursor-pointer"
                 title="Exit Tour"
               >
-                <X className="w-3.5 h-3.5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
@@ -224,7 +249,7 @@ export const RecruiterTour: React.FC<RecruiterTourProps> = ({ onOpenApp }) => {
 
                 <button
                   onClick={handleNextStep}
-                  className="px-3.5 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-lg shadow-cyan-500/20"
+                  className="px-3.5 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-lg shadow-cyan-500/20"
                 >
                   <span>{currentStepIndex === TOUR_STEPS.length - 1 ? 'Finish & Connect 🎉' : 'Next Step'}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -237,3 +262,4 @@ export const RecruiterTour: React.FC<RecruiterTourProps> = ({ onOpenApp }) => {
     </>
   );
 };
+

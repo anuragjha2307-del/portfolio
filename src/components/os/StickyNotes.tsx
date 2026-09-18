@@ -26,6 +26,7 @@ interface StickyNoteData {
   position: { top: number; right: number };
   isCollapsed?: boolean;
   actionApp?: AppId;
+  actionEvent?: string;
   actionLabel?: string;
 }
 
@@ -33,13 +34,13 @@ const INITIAL_NOTES: StickyNoteData[] = [
   {
     id: 'note-1',
     title: '📌 Quick Note for Recruiters',
-    content: 'Click any dock icon below or press Ctrl+K (⌘K) to trigger Command Spotlight. Live project demos run inside native sandboxes!',
-    tag: 'EXPLORE TIP',
+    content: 'Click [Start Tour] below to review my full-stack projects in 60s, or press Ctrl+K for Command Spotlight. All demos run inside native sandboxes!',
+    tag: 'QUICK TOUR',
     colorScheme: 'yellow',
     rotation: '-rotate-1',
     position: { top: 48, right: 24 },
-    actionApp: 'projects',
-    actionLabel: 'Browse All Sandboxes →',
+    actionEvent: 'start-anuragos-tour',
+    actionLabel: 'Start 60s Tour ⚡',
   },
   {
     id: 'note-2',
@@ -211,11 +212,15 @@ export const StickyNotes: React.FC<StickyNotesProps> = ({ onOpenApp }) => {
                     {note.tag}
                   </span>
 
-                  {note.actionApp && onOpenApp && (
+                  {(note.actionApp || note.actionEvent) && (
                     <button
                       onClick={() => {
                         sound.playClick();
-                        onOpenApp(note.actionApp!);
+                        if (note.actionEvent) {
+                          window.dispatchEvent(new CustomEvent(note.actionEvent));
+                        } else if (note.actionApp && onOpenApp) {
+                          onOpenApp(note.actionApp);
+                        }
                       }}
                       className="text-cyan-300 hover:text-white underline underline-offset-2 transition cursor-pointer"
                     >
