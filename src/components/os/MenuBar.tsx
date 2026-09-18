@@ -38,8 +38,16 @@ export const MenuBar: React.FC<MenuBarProps> = ({
 }) => {
   const [time, setTime] = useState<string>('');
   const [date, setDate] = useState<string>('');
-  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(!sound.isEnabled());
   const [showOsMenu, setShowOsMenu] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsMuted(!sound.isEnabled());
+    const unsub = sound.subscribe((enabled) => {
+      setIsMuted(!enabled);
+    });
+    return () => unsub();
+  }, []);
 
   useEffect(() => {
     const updateTime = () => {
@@ -57,8 +65,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
   }, []);
 
   const handleSoundToggle = () => {
-    const nextState = sound.toggle();
-    setIsMuted(!nextState);
+    sound.toggle();
   };
 
   const handleThemeCycle = () => {

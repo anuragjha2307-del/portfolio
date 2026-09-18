@@ -312,7 +312,10 @@ export const TerminalApp: React.FC<{ onOpenApp?: (id: any) => void }> = ({ onOpe
           ref={inputRef}
           type="text"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            sound.playKey();
+            setInput(e.target.value);
+          }}
           onKeyDown={handleKeyDown}
           className="flex-1 bg-transparent border-none outline-none text-white caret-cyan-400"
           autoFocus

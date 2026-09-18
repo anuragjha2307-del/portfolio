@@ -66,8 +66,16 @@ export const MobileLauncher: React.FC<MobileLauncherProps> = ({
   onSwitchToDesktop,
 }) => {
   const [activeApp, setActiveApp] = useState<AppId | null>(null);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(!sound.isEnabled());
   const [showNotes, setShowNotes] = useState(false);
+
+  React.useEffect(() => {
+    setIsMuted(!sound.isEnabled());
+    const unsub = sound.subscribe((enabled) => {
+      setIsMuted(!enabled);
+    });
+    return () => unsub();
+  }, []);
 
   const apps: MobileAppItem[] = [
     {
