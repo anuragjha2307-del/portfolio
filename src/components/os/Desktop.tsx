@@ -125,7 +125,7 @@ export const Desktop: React.FC<DesktopProps> = ({ onOpenApp, onThemeChange }) =>
     <div
       onContextMenu={handleContextMenu}
       onClick={closeContextMenu}
-      className="absolute inset-0 pt-10 pb-20 px-4 sm:px-6 overflow-hidden flex flex-col justify-between cyber-grid select-none"
+      className="absolute inset-0 pt-10 pb-20 px-4 sm:px-6 overflow-x-hidden overflow-y-auto md:overflow-hidden touch-pan-y flex flex-col justify-between cyber-grid select-none"
     >
       {/* Visual Depth: Ambient Cursor Follower, Interactive Particle Mesh, and Code Watermarks */}
       <BackgroundCanvas />

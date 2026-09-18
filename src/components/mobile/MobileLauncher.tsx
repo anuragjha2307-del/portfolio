@@ -211,7 +211,7 @@ export const MobileLauncher: React.FC<MobileLauncherProps> = ({
   const activeAppMeta = apps.find((a) => a.id === activeApp);
 
   return (
-    <div className="relative min-h-screen w-full bg-slate-950 text-slate-100 flex flex-col font-sans select-none overflow-x-hidden pb-12">
+    <div className="relative min-h-screen w-full bg-slate-950 text-slate-100 flex flex-col font-sans select-none overflow-x-hidden overflow-y-auto pb-24 touch-pan-y overscroll-y-contain">
       {/* 1. Mobile Status & Control Bar */}
       <header className="sticky top-0 z-40 h-12 w-full bg-slate-950/90 backdrop-blur-xl border-b border-white/10 px-4 flex items-center justify-between text-xs">
         <div className="flex items-center gap-2 font-mono">
