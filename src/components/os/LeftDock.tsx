@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { User, Box, Brain, Smartphone, Fingerprint, Sparkles } from 'lucide-react';
+import { User, Box, Brain, Smartphone, Fingerprint, Sparkles, Activity } from 'lucide-react';
 import { AppId } from '@/types/os';
 import { sound } from '@/lib/sound';
 
@@ -42,6 +42,11 @@ export const LeftDock: React.FC<LeftDockProps> = ({ onOpenApp, activeAppId }) =>
       id: 'smart-presence',
       label: 'Smart Presence',
       icon: <Fingerprint className="w-5 h-5 text-cyan-300" />,
+    },
+    {
+      id: 'score-predictor',
+      label: 'IPL Predictor',
+      icon: <Activity className="w-5 h-5 text-cyan-300" />,
     },
     {
       id: 'copilot',

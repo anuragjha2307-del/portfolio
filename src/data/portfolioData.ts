@@ -142,6 +142,38 @@ export const PROJECTS: Project[] = [
       'Dark/Light themed mobile UI with fluid responsive layouts',
     ],
   },
+  {
+    id: 'score-predictor',
+    title: 'IPL Cricket Score Predictor',
+    subtitle: 'End-to-End IPL T20 Score Prediction & ML Analytics Engine',
+    tagline: 'Production XGBoost Regressor & PyTorch MLP trained on 102,911 historical Cricsheet deliveries across 1,107 matches with dynamic Streamlit analytics',
+    category: 'AI / ML',
+    domain: 'Machine Learning & Predictive Sports Analytics',
+    techStack: ['Python', 'XGBoost', 'PyTorch', 'Scikit-learn', 'Streamlit', 'Pandas', 'NumPy', 'MongoDB'],
+    status: 'online',
+    uptime: '99.9%',
+    latency: '18ms',
+    appWindowId: 'score-predictor',
+    github: 'https://github.com/anuragjha2307-del/score-predictor',
+    demoUrl: 'https://github.com/anuragjha2307-del/score-predictor',
+    metrics: [
+      { label: 'Test MAE', value: '13.27 runs' },
+      { label: 'Test R²', value: '0.718' },
+      { label: 'Deliveries Analyzed', value: '102.9k+' },
+    ],
+    highlights: [
+      'Engineered an end-to-end ML prediction pipeline on 102,911 historical IPL deliveries (1,107 matches) with zero data leakage using match-grouped 80/20 GroupShuffleSplit.',
+      'Extracted dynamic cricket domain features including ball-by-ball rolling run rates, wickets in hand, projected CRR, and canonicalized 33 venues and 10 franchises.',
+      'Trained and benchmarked 4 regression architectures (XGBoost, Ridge, Random Forest, PyTorch MLP with BatchNorm/Dropout), selecting XGBoost achieving 13.27 MAE.',
+      'Architected an interactive Streamlit analytics platform with dynamic 68%/95% confidence bands across match phases and MongoDB telemetry logging.',
+    ],
+    features: [
+      'Real-time first-innings score prediction powered by optimized XGBoost Regressor',
+      'Phase-specific dynamic confidence intervals (Powerplay, Middle, Death overs)',
+      'Multi-model benchmark dashboard (XGBoost vs. PyTorch MLP vs. Random Forest vs. Ridge)',
+      'Scikit-learn ColumnTransformer preprocessing pipeline & MongoDB Atlas integration',
+    ],
+  },
 ];
 
 export const WORK_EXPERIENCES: Experience[] = [
@@ -231,8 +263,8 @@ export const ATS_PROFILES = {
     headline: 'AI & Machine Learning Engineer | Deep Learning, NLP & Computer Vision',
     summary:
       'Innovative AI Engineer with proven expertise in architecting NLP literature exploration systems, OpenCV deep learning biometric pipelines, and predictive ML models via Flask REST APIs. Reduced data processing latency by 40% during ML internship at EduSkills Academy.',
-    topSkills: ['Python', 'PyTorch', 'OpenCV', 'NLP / LLM', 'Scikit-learn', 'TensorFlow', 'Flask REST APIs', 'Pandas & NumPy'],
-    priorityProjects: ['ai-assistant', 'smart-presence'],
+    topSkills: ['Python', 'PyTorch', 'XGBoost', 'OpenCV', 'NLP / LLM', 'Scikit-learn', 'TensorFlow', 'Flask REST APIs', 'Pandas & NumPy'],
+    priorityProjects: ['score-predictor', 'ai-assistant', 'smart-presence'],
   },
   full_stack: {
     label: 'Full-Stack Developer',

@@ -37,6 +37,7 @@ import { ProjectsHubApp } from '@/components/apps/ProjectsHubApp';
 import { AIAssistantApp } from '@/components/apps/AIAssistantApp';
 import { SparkMobileApp } from '@/components/apps/SparkMobileApp';
 import { SmartPresenceApp } from '@/components/apps/SmartPresenceApp';
+import { ScorePredictorApp } from '@/components/apps/ScorePredictorApp';
 import { PortfolioCopilot } from '@/components/apps/PortfolioCopilot';
 import { TerminalApp } from '@/components/apps/TerminalApp';
 import { TechRadarApp } from '@/components/apps/TechRadarApp';
@@ -103,6 +104,15 @@ export const MobileLauncher: React.FC<MobileLauncherProps> = ({
       icon: <QrCode className="w-6 h-6 text-white" />,
       color: 'from-emerald-500 to-teal-600',
       badge: 'BIOMETRIC',
+      featured: true,
+    },
+    {
+      id: 'score-predictor',
+      title: 'IPL Score Predictor',
+      subtitle: 'XGBoost ML Analytics',
+      icon: <Activity className="w-6 h-6 text-white" />,
+      color: 'from-amber-500 to-yellow-600',
+      badge: 'ML LIVE',
       featured: true,
     },
     {
@@ -199,6 +209,8 @@ export const MobileLauncher: React.FC<MobileLauncherProps> = ({
         return <SparkMobileApp />;
       case 'smart-presence':
         return <SmartPresenceApp />;
+      case 'score-predictor':
+        return <ScorePredictorApp />;
       case 'copilot':
         return <PortfolioCopilot onOpenApp={handleOpenApp} />;
       case 'terminal':

@@ -71,6 +71,11 @@ KEY PROJECTS
 
 3. Spark Dating App — High-Performance Mobile Platform (React Native, Expo, Redux Toolkit, Reanimated)
 - 60 FPS gesture-driven card matchmaking with real-time push architecture and instant APK builds.
+
+4. IPL Cricket Score Predictor — Machine Learning Analytics System (Python, XGBoost, PyTorch, Streamlit)
+- Production ML pipeline trained on 102,911 deliveries across 1,107 matches with zero-leakage GroupShuffleSplit.
+- Benchmarked 4 regression architectures, selecting XGBoost Regressor (13.27 MAE, 0.718 R² score).
+- Dynamic phase-specific confidence bands and interactive Streamlit web dashboard with MongoDB telemetry.
 `.trim();
 
     navigator.clipboard.writeText(text);

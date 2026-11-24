@@ -4,6 +4,7 @@ export type AppId =
   | 'ai-assistant'
   | 'spark-mobile'
   | 'smart-presence'
+  | 'score-predictor'
   | 'terminal'
   | 'tech-radar'
   | 'resume-studio'

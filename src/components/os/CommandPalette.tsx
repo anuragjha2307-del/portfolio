@@ -93,6 +93,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       keywords: 'opencv face biometric totp haversine gps geofence attendance flask',
     },
     {
+      id: 'score-predictor',
+      title: 'IPL Cricket Score Predictor (XGBoost ML Sandbox)',
+      category: 'Projects',
+      icon: <Activity className="w-4 h-4 text-amber-400" />,
+      action: () => onOpenApp('score-predictor'),
+      keywords: 'cricket ipl score predictor xgboost ml machine learning pytorch streamlit cricsheet sports analytics',
+    },
+    {
       id: 'copilot',
       title: 'Portfolio AI Copilot (Trained on Anurag)',
       category: 'Applications',

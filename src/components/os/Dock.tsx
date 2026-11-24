@@ -69,6 +69,13 @@ export const Dock: React.FC<DockProps> = ({ openApps, activeAppId, onOpenApp }) 
       badge: 'QR Scanner',
     },
     {
+      id: 'score-predictor',
+      label: 'IPL Score Predictor',
+      icon: <Activity className="w-5 h-5" />,
+      color: 'from-amber-500 to-yellow-600',
+      badge: 'ML Engine',
+    },
+    {
       id: 'copilot',
       label: 'Portfolio AI Copilot',
       icon: <Bot className="w-5 h-5" />,

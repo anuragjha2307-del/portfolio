@@ -117,7 +117,18 @@ export const TerminalApp: React.FC<{ onOpenApp?: (id: any) => void }> = ({ onOpe
         break;
 
       case 'run':
-        if (arg === 'spark-apk' || arg === 'spark') {
+        if (arg === 'score-predictor' || arg === 'cricket' || arg === 'score') {
+          output = (
+            <div className="space-y-1 text-xs text-slate-200">
+              <div className="text-amber-400 font-bold">[ML INFERENCE ENGINE] Loading 102k+ Cricsheet delivery weights...</div>
+              <div>✔ ColumnTransformer OneHotEncoder + StandardScaler pipeline loaded</div>
+              <div>✔ XGBoost Regressor initialized (Test MAE: 13.27 runs, R²: 0.718)</div>
+              <div>✔ Precomputing phase-specific residual confidence intervals (±10.2 to ±23.4 runs)...</div>
+              <div className="text-emerald-400 font-bold">✔ Model ready! Launching IPL Score Predictor sandbox...</div>
+            </div>
+          );
+          if (onOpenApp) setTimeout(() => onOpenApp('score-predictor'), 800);
+        } else if (arg === 'spark-apk' || arg === 'spark') {
           output = (
             <div className="space-y-1 text-xs text-slate-200">
               <div className="text-rose-400 font-bold">[BUILD EXPO EAS] Compiling Spark Dating App target: android-arm64</div>
@@ -150,7 +161,10 @@ export const TerminalApp: React.FC<{ onOpenApp?: (id: any) => void }> = ({ onOpe
         if (arg.includes('log')) {
           output = (
             <div className="space-y-1.5 text-xs font-mono">
-              <div><span className="text-amber-400">commit 9f4a18c</span> (HEAD -&gt; main, origin/main)</div>
+              <div><span className="text-amber-400">commit 8e3d14f</span> (HEAD -&gt; main, origin/main)</div>
+              <div className="text-slate-400">Author: Anurag Jha &lt;ajha5678910@gmail.com&gt;</div>
+              <div className="text-white">feat: train XGBoost IPL cricket score predictor on 102k ball-by-ball deliveries</div>
+              <div className="pt-1"><span className="text-amber-400">commit 9f4a18c</span></div>
               <div className="text-slate-400">Author: Anurag Jha &lt;ajha5678910@gmail.com&gt;</div>
               <div className="text-white">feat: deploy high-throughput PyPDF parsing pipeline and IEEE LaTeX export</div>
               <div className="pt-1"><span className="text-amber-400">commit 7d21b90</span></div>

@@ -45,6 +45,7 @@ export const PortfolioCopilot: React.FC<CopilotProps> = ({ onOpenApp }) => {
   ]);
 
   const quickQuestions = [
+    { label: 'Cricket Score Predictor ML', query: 'Tell me about the IPL Cricket Score Predictor project' },
     { label: 'Backend Tech Stack', query: 'What tech stack does Anurag use for backend?' },
     { label: 'Show Mobile Work (Spark)', query: 'Show me his mobile development work' },
     { label: 'Biometric Attendance Details', query: 'How does his biometric attendance system work?' },
@@ -75,6 +76,9 @@ export const PortfolioCopilot: React.FC<CopilotProps> = ({ onOpenApp }) => {
       if (q.includes('backend') || q.includes('database') || q.includes('api')) {
         reply = `**Backend & Distributed Architecture:**\nAnurag specializes in high-throughput Python backends using **Flask REST APIs**, sub-second latency endpoints, and strict security validation. For data persistence, he works with **PostgreSQL**, **MySQL**, and **MongoDB** with solid schema design and indexing. He also implements dynamic **TOTP authentication** and automated **CI/CD pipelines** via GitHub Actions.`;
         actionBtn = { label: 'Explore Architecture Radar', targetApp: 'tech-radar' };
+      } else if (q.includes('cricket') || q.includes('score') || q.includes('predictor') || q.includes('xgboost') || q.includes('ipl')) {
+        reply = `**IPL Cricket Score Predictor (Machine Learning & Deep Learning):**\nAnurag engineered an end-to-end sports analytics engine predicting first-innings totals from **102,911 historical IPL deliveries** (1,107 matches) from Cricsheet with zero data leakage (match-grouped 80/20 GroupShuffleSplit). He benchmarked 4 regression architectures (XGBoost, Ridge, Random Forest, PyTorch MLP with BatchNorm/Dropout), with **XGBoost achieving 13.27 MAE** and **0.718 R²**. The system features an interactive Streamlit UI, phase-specific confidence intervals, and MongoDB telemetry.`;
+        actionBtn = { label: 'Open IPL Score Predictor Sandbox', targetApp: 'score-predictor' };
       } else if (q.includes('mobile') || q.includes('spark') || q.includes('react native') || q.includes('expo') || q.includes('apk')) {
         reply = `**Mobile Development Work (Spark Dating App):**\nAnurag built the **Spark Dating App** using **React Native**, **Expo EAS**, and **Reanimated 3**. It features buttery-smooth 60 FPS gesture-driven swipe cards, real-time WebSocket match events, and Redux Toolkit state caching. You can test the interactive phone simulator right now or download the standalone APK!`;
         actionBtn = { label: 'Launch Spark Mobile Simulator', targetApp: 'spark-mobile' };

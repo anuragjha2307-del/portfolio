@@ -13,6 +13,7 @@ import { ProjectsHubApp } from '@/components/apps/ProjectsHubApp';
 import { AIAssistantApp } from '@/components/apps/AIAssistantApp';
 import { SparkMobileApp } from '@/components/apps/SparkMobileApp';
 import { SmartPresenceApp } from '@/components/apps/SmartPresenceApp';
+import { ScorePredictorApp } from '@/components/apps/ScorePredictorApp';
 import { PortfolioCopilot } from '@/components/apps/PortfolioCopilot';
 import { TerminalApp } from '@/components/apps/TerminalApp';
 import { TechRadarApp } from '@/components/apps/TechRadarApp';
@@ -57,6 +58,11 @@ const DEFAULT_WINDOWS: Record<
     title: 'Smart Presence — AI Biometrics & Geofenced Attendance',
     initialSize: { width: 980, height: 630 },
     initialPosition: { x: 130, y: 55 },
+  },
+  'score-predictor': {
+    title: 'IPL Cricket Score Predictor — Machine Learning Sandbox',
+    initialSize: { width: 980, height: 640 },
+    initialPosition: { x: 150, y: 50 },
   },
   copilot: {
     title: 'Portfolio AI Copilot (Trained on Anurag)',
@@ -273,6 +279,9 @@ export default function Home() {
             break;
           case 'smart-presence':
             content = <SmartPresenceApp />;
+            break;
+          case 'score-predictor':
+            content = <ScorePredictorApp />;
             break;
           case 'copilot':
             content = <PortfolioCopilot onOpenApp={handleOpenApp} />;

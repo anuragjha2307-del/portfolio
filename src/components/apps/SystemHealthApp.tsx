@@ -62,6 +62,17 @@ export const SystemHealthApp: React.FC = () => {
       memory: '820 MB / 2.0 GB',
       lastChecked: 'Just now',
     },
+    {
+      id: 'score-predictor',
+      name: 'IPL Score Predictor (XGBoost & Streamlit)',
+      provider: 'Streamlit Cloud & MongoDB Atlas',
+      endpoint: 'https://score-predictor.streamlit.app/healthz',
+      status: 'OPERATIONAL',
+      uptime: '99.90%',
+      latency: 18,
+      memory: '512 MB / 2.0 GB',
+      lastChecked: 'Just now',
+    },
   ]);
 
   const [logs, setLogs] = useState<string[]>([
@@ -69,6 +80,7 @@ export const SystemHealthApp: React.FC = () => {
     '[09:32:15] INFO: OpenCV facial embedding cache validated (128D vectors mapped)',
     '[09:32:30] INFO: Haversine geofence calculation verified for Galgotias University bounds (28.4744° N, 77.5040° E)',
     '[09:32:45] INFO: Expo EAS OTA build channel #production synchronized',
+    '[09:33:02] INFO: XGBoost model inference cache verified (102.9k delivery weights loaded, 18ms latency)',
   ]);
 
   // Periodic simulated heartbeat

@@ -33,7 +33,7 @@ export const ProjectsHubApp: React.FC<ProjectsHubAppProps> = ({ onOpenApp }) => 
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {PROJECTS.map((proj) => (
           <div
             key={proj.id}
